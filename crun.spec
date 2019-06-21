@@ -1,38 +1,47 @@
-Name:           crun
-Version:        0.1.1
-Release:        1%{?dist}
-Summary:        Lightweight, easy to use, simpler cron-like tool  
+Summary: OCI runtime written in C
+Name: crun
+Version: 0.6
+Release: 1%{?dist}
+Source0: https://github.com/giuseppe/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
+License: GPLv3+
+URL: https://github.com/giuseppe/crun
 
-Group:          Applications/System
-License:        GPLv2+
-URL:            http://code.google.com/p/koolkit/wiki/crun
-Source0:        http://koolkit.googlecode.com/files/%{name}-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# We always run autogen.sh
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: gcc
+BuildRequires: python
+BuildRequires: git
+BuildRequires: libcap-devel
+BuildRequires: systemd-devel
+BuildRequires: yajl-devel
+BuildRequires: libseccomp-devel
+BuildRequires: libselinux-devel
+BuildRequires: python3-libmount
+BuildRequires: libtool
+BuildRequires: go-md2man
 
 %description
-crun is a light weight, easy to use, simpler cron like tool.
-It Executes a given program, a specified number of times, after a specified
-time interval.
+crun is a OCI runtime
 
 %prep
-%setup -q
+%autosetup -n %{name}-%{version}
 
 %build
-%configure
-make %{?_smp_mflags}
+./autogen.sh
+%configure --disable-silent-rules
+
+%make_build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+%make_install
+rm -rf $RPM_BUILD_ROOT/usr/lib*
 
 %files
-%defattr(-,root,root,-)
-%doc AUTHORS ChangeLog COPYING NEWS README
-%{_bindir}/crun
+%license COPYING
+%{_bindir}/%{name}
+%{_mandir}/man1/*
 
 %changelog
-* Fri Dec 11 2009 Damien Durand <splinux@fedoraproject.org> 0.1.1-1
-- Initial release
+* Tue Jun 18 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.6-1
+- built version 0.6
