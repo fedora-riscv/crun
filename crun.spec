@@ -1,6 +1,6 @@
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.6
+Version: 0.7
 Release: 1%{?dist}
 Source0: https://github.com/giuseppe/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
@@ -22,7 +22,7 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 
 %description
-crun is a OCI runtime
+crun is a runtime for running OCI containers
 
 %prep
 %autosetup -n %{name}-%{version}
@@ -43,5 +43,8 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Jul 18 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.7-1
+- built version 0.7
+
 * Tue Jun 18 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.6-1
 - built version 0.6
