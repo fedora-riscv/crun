@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -20,6 +20,7 @@ BuildRequires: libselinux-devel
 BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
+Provides: oci-runtime
 
 %description
 crun is a runtime for running OCI containers
@@ -43,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Mon Sep 9 2019 Dan Walsh <dwalsh@redhat.com> - 0.8-2
+- Add provides oci-runtime
+
 * Mon Aug 19 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.8-1
 - built version 0.8
 
