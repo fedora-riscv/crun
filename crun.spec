@@ -1,10 +1,10 @@
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.8
+Version: 0.9
 Release: 1%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
-URL: https://github.com/giuseppe/crun
+URL: https://github.com/containers/crun
 
 # We always run autogen.sh
 BuildRequires: autoconf
@@ -20,6 +20,7 @@ BuildRequires: libselinux-devel
 BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
+Provides: oci-runtime = 2
 
 %description
 crun is a runtime for running OCI containers
@@ -43,8 +44,20 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Sep 11 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.9-1
+- built version 0.9
+
+* Tue Sep 10 2019 Jindrich Novy <jnovy@redhat.com> - 0.8-3
+- Add versioned oci-runtime provide.
+
+* Mon Sep 9 2019 Dan Walsh <dwalsh@redhat.com> - 0.8-2
+- Add provides oci-runtime
+
 * Mon Aug 19 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.8-1
 - built version 0.8
+
+* Wed Jul 24 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.7-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
 * Thu Jul 18 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.7-1
 - built version 0.7
