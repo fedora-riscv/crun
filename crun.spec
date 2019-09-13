@@ -1,8 +1,12 @@
+%global git0 https://github.com/containers/%{name}
+%global commit0 6a2c11176300e86a99226d77777e1556d98f0416
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.9
-Release: 1%{?dist}
-Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
+Release: 2%{?dist}
+Source0: %{git0}/archive/%{commit0}/%{name}-%{shortcommit0}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
 
@@ -44,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Fri Sep 13 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.9-2
+- built version 6a2c11176300e86a99226d77777e1556d98f0416
+
 * Wed Sep 11 2019 Giuseppe Scrivano <gscrivan@redhat.com> - 0.9-1
 - built version 0.9
 
