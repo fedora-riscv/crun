@@ -30,7 +30,7 @@ Provides: oci-runtime = 2
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -Sgit -n %{name}-%{commit0}
 
 %build
 ./autogen.sh
