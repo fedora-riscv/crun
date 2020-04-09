@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.13
-Release: 1%{?dist}
+Release: 2%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -22,11 +22,13 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
 
+Patch0: 0001-linux-do-not-mount-label-cgroup.patch
+
 %description
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 ./autogen.sh
@@ -44,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Apr 09 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.13-2
+- fix cgroup v1 mount on Linux 5.6
+
 * Thu Mar 05 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.13-1
 - built version 0.13
 

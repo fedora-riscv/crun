@@ -1,0 +1,65 @@
+From ef38609ef628594da7b8adf94b6fcd5d14c88af7 Mon Sep 17 00:00:00 2001
+From: Giuseppe Scrivano <gscrivan@redhat.com>
+Date: Wed, 8 Apr 2020 16:47:22 +0200
+Subject: [PATCH] linux: do not mount label cgroup
+
+skip setting a context= option when mounting cgroup.  At least Linux
+5.6 fails with EINVAL if it set.
+
+Signed-off-by: Giuseppe Scrivano <gscrivan@redhat.com>
+---
+ src/libcrun/linux.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/libcrun/linux.c b/src/libcrun/linux.c
+index 6836326..92b2055 100644
+--- a/src/libcrun/linux.c
++++ b/src/libcrun/linux.c
+@@ -602,7 +602,7 @@ do_mount_cgroup_v2 (libcrun_container_t *container,
+         {
+           crun_error_release (err);
+ 
+-          ret = do_mount (container, "/sys/fs/cgroup", targetfd, target, NULL, MS_BIND | mountflags, NULL, 0, err);
++          ret = do_mount (container, "/sys/fs/cgroup", targetfd, target, NULL, MS_BIND | mountflags, NULL, 1, err);
+         }
+       return ret;
+     }
+@@ -648,7 +648,7 @@ do_mount_cgroup_v1 (libcrun_container_t *container,
+   if (UNLIKELY (subsystems == NULL))
+     return -1;
+ 
+-  ret = do_mount (container, source, targetfd, target, "tmpfs", mountflags, "size=1024k", 0, err);
++  ret = do_mount (container, source, targetfd, target, "tmpfs", mountflags, "size=1024k", 1, err);
+   if (UNLIKELY (ret < 0))
+     return ret;
+ 
+@@ -704,7 +704,7 @@ do_mount_cgroup_v1 (libcrun_container_t *container,
+ 
+       if (has_cgroupns)
+         {
+-          ret = do_mount (container, source_path, subsystemfd, subsystem_path, "cgroup", mountflags, subsystem_fqn, 0, err);
++          ret = do_mount (container, source_path, subsystemfd, subsystem_path, "cgroup", mountflags, subsystem_fqn, 1, err);
+           if (UNLIKELY (ret < 0))
+             {
+               if (crun_error_get_errno (err) == ENOENT || crun_error_get_errno (err) == ENODEV)
+@@ -718,7 +718,7 @@ do_mount_cgroup_v1 (libcrun_container_t *container,
+         }
+       else
+         {
+-          ret = do_mount (container, source_path, subsystemfd, subsystem_path, NULL, MS_BIND | mountflags, NULL, 0, err);
++          ret = do_mount (container, source_path, subsystemfd, subsystem_path, NULL, MS_BIND | mountflags, NULL, 1, err);
+           if (UNLIKELY (ret < 0))
+             {
+               if (crun_error_get_errno (err) != ENOENT)
+@@ -727,7 +727,7 @@ do_mount_cgroup_v1 (libcrun_container_t *container,
+               crun_error_release (err);
+ 
+               /* We might already be in a container.  Mount the source subsystem.  */
+-              ret = do_mount (container, source_subsystem, subsystemfd, subsystem_path, NULL, MS_BIND | mountflags, NULL, 0, err);
++              ret = do_mount (container, source_subsystem, subsystemfd, subsystem_path, NULL, MS_BIND | mountflags, NULL, 1, err);
+               if (UNLIKELY (ret < 0))
+                 return ret;
+             }
+-- 
+2.25.1
+
