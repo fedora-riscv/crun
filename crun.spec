@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.13
-Release: 2%{?dist}
+Release: 1%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -46,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Mon May 18 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.13-1
+- autobuilt 0.13
+
 * Thu Apr 09 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.13-2
 - fix cgroup v1 mount on Linux 5.6
 
