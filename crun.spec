@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.14
-Release: 2%{?dist}
+Release: 1%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Tue Jul 07 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14-1
+- autobuilt 0.14
+
 * Thu Jul 02 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14-1
 - built version 0.14
 
