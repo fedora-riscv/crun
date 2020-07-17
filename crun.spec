@@ -22,8 +22,6 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
 
-Patch0: 0001-linux-do-not-mount-label-cgroup.patch
-
 %description
 crun is a runtime for running OCI containers
 
