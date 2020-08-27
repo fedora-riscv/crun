@@ -22,6 +22,8 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
 
+Patch0: 0001-state-fix-race-condition-when-reading-cgroup.patch
+
 %description
 crun is a runtime for running OCI containers
 
@@ -44,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Aug 27 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14.1-3
+- backport ed9c3e6f466dfb6d2e79802060fabd5f4b66f78e
+
 * Wed Jul 08 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14.1-1
 - built version 0.14.1
 
