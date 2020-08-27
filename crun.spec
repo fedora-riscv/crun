@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.14.1
-Release: 1%{?dist}
+Release: 3%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -21,6 +21,8 @@ BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
+
+Patch0: 0001-state-fix-race-condition-when-reading-cgroup.patch
 
 %description
 crun is a runtime for running OCI containers
@@ -44,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Aug 27 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14.1-3
+- backport ed9c3e6f466dfb6d2e79802060fabd5f4b66f78e
+
 * Mon Jul 13 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14.1-1
 - autobuilt 0.14.1
 
