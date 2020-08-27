@@ -22,11 +22,13 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
 
+Patch0: 0001-state-fix-race-condition-when-reading-cgroup.patch
+
 %description
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 ./autogen.sh
@@ -44,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Aug 27 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14.1-3
+- backport ed9c3e6f466dfb6d2e79802060fabd5f4b66f78e
+
 * Mon Aug 17 13:15:45 GMT 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14.1-1
 - autobuilt 0.14.1
 
