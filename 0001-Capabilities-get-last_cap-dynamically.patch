@@ -1,0 +1,100 @@
+From 2dd22b2f1aa13edc704cf5a6e50793457076789e Mon Sep 17 00:00:00 2001
+From: Ed Santiago <santiago@redhat.com>
+Date: Mon, 31 Aug 2020 12:09:39 -0600
+Subject: [PATCH] Capabilities: get last_cap dynamically
+
+Determine the kernel capability set at run time, for
+consistency with runc.
+
+Signed-off-by: Ed Santiago <santiago@redhat.com>
+(cherry picked from commit 4453af4c060e380051552ee589af5cad37f2ae82)
+---
+ src/libcrun/container.c |  4 ++++
+ src/libcrun/linux.c     | 29 +++++++++++++++++++++++++++--
+ src/libcrun/linux.h     |  1 +
+ 3 files changed, 32 insertions(+), 2 deletions(-)
+
+diff --git a/src/libcrun/container.c b/src/libcrun/container.c
+index 3723300..0870cf2 100644
+--- a/src/libcrun/container.c
++++ b/src/libcrun/container.c
+@@ -480,6 +480,10 @@ initialize_security (runtime_spec_schema_config_schema_process *proc, libcrun_er
+   if (UNLIKELY (ret < 0))
+     return ret;
+ 
++  ret = libcrun_init_caps (err);
++  if (UNLIKELY (ret < 0))
++    return ret;
++
+   return 0;
+ }
+ 
+diff --git a/src/libcrun/linux.c b/src/libcrun/linux.c
+index fa87d82..316943d 100644
+--- a/src/libcrun/linux.c
++++ b/src/libcrun/linux.c
+@@ -2291,6 +2291,28 @@ has_cap_on (int cap, long unsigned *caps)
+   return (CAP_TO_MASK_1 (cap) & caps[1]);
+ }
+ 
++static unsigned long cap_last_cap;
++
++int
++libcrun_init_caps (libcrun_error_t *err)
++{
++  cleanup_close int fd = -1;
++  int ret;
++  char buffer[16];
++  fd = open ("/proc/sys/kernel/cap_last_cap", O_RDONLY);
++  if (fd < 0)
++    return crun_make_error (err, errno, "open /proc/sys/kernel/cap_last_cap");
++  ret = TEMP_FAILURE_RETRY (read (fd, buffer, sizeof (buffer)));
++  if (UNLIKELY (ret < 0))
++    return crun_make_error (err, errno, "read from /proc/sys/kernel/cap_last_cap");
++
++  errno = 0;
++  cap_last_cap = strtoul (buffer, NULL, 10);
++  if (errno != 0)
++    return crun_make_error (err, errno, "strtoul() from /proc/sys/kernel/cap_last_cap");
++  return 0;
++}
++
+ static int
+ set_required_caps (struct all_caps_s *caps, uid_t uid, gid_t gid, int no_new_privs, libcrun_error_t *err)
+ {
+@@ -2299,7 +2321,10 @@ set_required_caps (struct all_caps_s *caps, uid_t uid, gid_t gid, int no_new_pri
+   struct __user_cap_header_struct hdr = { _LINUX_CAPABILITY_VERSION_3, 0 };
+   struct __user_cap_data_struct data[2] = { { 0 } };
+ 
+-  for (cap = 0; cap <= CAP_LAST_CAP; cap++)
++  if (cap_last_cap == 0)
++    return crun_make_error (err, 0, "internal error: max number of capabilities not initialized");
++
++  for (cap = 0; cap <= cap_last_cap; cap++)
+     if (! has_cap_on (cap, caps->bounding))
+       {
+         ret = prctl (PR_CAPBSET_DROP, cap, 0, 0, 0);
+@@ -2335,7 +2360,7 @@ set_required_caps (struct all_caps_s *caps, uid_t uid, gid_t gid, int no_new_pri
+   if (UNLIKELY (ret < 0 && !(errno == EINVAL || errno == EPERM)))
+     return crun_make_error (err, errno, "prctl reset ambient");
+ 
+-  for (cap = 0; cap <= CAP_LAST_CAP; cap++)
++  for (cap = 0; cap <= cap_last_cap; cap++)
+     if (has_cap_on (cap, caps->ambient))
+       {
+         ret = prctl (PR_CAP_AMBIENT, PR_CAP_AMBIENT_RAISE, cap, 0, 0);
+diff --git a/src/libcrun/linux.h b/src/libcrun/linux.h
+index a92b5f1..fc70feb 100644
+--- a/src/libcrun/linux.h
++++ b/src/libcrun/linux.h
+@@ -38,6 +38,7 @@ pid_t libcrun_run_linux_container (libcrun_container_t *container,
+                                    libcrun_error_t *err);
+ int get_notify_fd (libcrun_context_t *context, libcrun_container_t *container, int *notify_socket_out, libcrun_error_t *err);
+ int libcrun_set_mounts (libcrun_container_t *container, const char *rootfs, libcrun_error_t *err);
++int libcrun_init_caps (libcrun_error_t *err);
+ int libcrun_do_pivot_root (libcrun_container_t *container, bool no_pivot, const char *rootfs, libcrun_error_t *err);
+ int libcrun_reopen_dev_null (libcrun_error_t *err);
+ int libcrun_set_usernamespace (libcrun_container_t *container, pid_t pid, libcrun_error_t *err);
+-- 
+2.26.2
+
