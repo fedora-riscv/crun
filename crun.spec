@@ -22,9 +22,6 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
 
-Patch0: 0001-state-fix-race-condition-when-reading-cgroup.patch
-Patch1: 0001-Capabilities-get-last_cap-dynamically.patch
-
 %description
 crun is a runtime for running OCI containers
 
