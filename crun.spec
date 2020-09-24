@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.15
-Release: 2%{?dist}
+Release: 3%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -44,6 +44,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Sep 24 10:13:25 EDT 2020 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.15-3
+- release tag ahead of f32
+
 * Wed Sep 23 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.15-2
 - rebuild
 
