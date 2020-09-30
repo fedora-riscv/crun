@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.15
-Release: 3%{?dist}
+Release: 4%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv3+
 URL: https://github.com/containers/crun
@@ -21,6 +21,8 @@ BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
 Provides: oci-runtime = 2
+
+Patch0: 0001-exec-check-read-bytes-from-sync.patch
 
 %description
 crun is a runtime for running OCI containers
@@ -44,8 +46,14 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Sep 30 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.15-4
+- backport "exec: check read bytes from sync"
+
 * Thu Sep 24 10:13:25 EDT 2020 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.15-3
 - release tag ahead of f32
+
+* Wed Sep 23 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.15-1
+- autobuilt 0.15
 
 * Wed Sep 23 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.15-2
 - rebuild
