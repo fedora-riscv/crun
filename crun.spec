@@ -10,7 +10,11 @@ URL: https://github.com/containers/crun
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: gcc
+%if 0%{?centos} >= 8
+BuildRequires: python3
+%else
 BuildRequires: python
+%endif
 BuildRequires: git
 BuildRequires: libcap-devel
 BuildRequires: systemd-devel
