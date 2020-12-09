@@ -65,9 +65,6 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 * Wed Sep 23 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.15-1
 - autobuilt 0.15
 
-* Mon Sep 14 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14.1-1
-- autobuilt 0.14.1
-
 * Wed Sep 23 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.15-1
 - build version 0.15
 
