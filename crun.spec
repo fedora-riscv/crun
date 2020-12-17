@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.16
-Release: 2%{?dist}
+Release: 3%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -25,6 +25,9 @@ BuildRequires: libselinux-devel
 BuildRequires: libtool
 BuildRequires: go-md2man
 BuildRequires: make
+%ifnarch %ix86
+BuildRequires: criu-devel >= 3.15
+%endif
 Provides: oci-runtime = 2
 
 %description
@@ -49,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Dec 17 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.16-3
+- build with CRIU
+
 * Wed Nov 25 2020 Jindrich Novy <jnovy@redhat.com> - 0.16-2
 - fix license
 
