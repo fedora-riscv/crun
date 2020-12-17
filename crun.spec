@@ -24,6 +24,7 @@ BuildRequires: libseccomp-devel
 BuildRequires: libselinux-devel
 BuildRequires: libtool
 BuildRequires: go-md2man
+BuildRequires: make
 Provides: oci-runtime = 2
 
 %description
