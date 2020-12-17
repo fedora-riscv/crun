@@ -20,6 +20,7 @@ BuildRequires: libselinux-devel
 BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
+BuildRequires: make
 Provides: oci-runtime = 2
 
 %description
