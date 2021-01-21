@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.16
-Release: 3%{?dist}
+Version: 0.17
+Release: 1%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Jan 21 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.17-1
+- built version 0.17
+
 * Thu Dec 17 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.16-3
 - build with CRIU
 
