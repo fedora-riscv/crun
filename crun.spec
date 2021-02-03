@@ -10,17 +10,20 @@ URL: https://github.com/containers/crun
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: gcc
+%if 0%{?centos} >= 8
+BuildRequires: python3
+%else
+BuildRequires: python3-libmount
 BuildRequires: python
+%endif
 BuildRequires: git
 BuildRequires: libcap-devel
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
 BuildRequires: libseccomp-devel
 BuildRequires: libselinux-devel
-BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
-BuildRequires: make
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.15
 %endif
