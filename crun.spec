@@ -10,7 +10,7 @@ URL: https://github.com/containers/crun
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: gcc
-%if 0%{?centos} >= 8
+%if 0%{?centos}
 BuildRequires: python3
 %else
 BuildRequires: python3-libmount
@@ -24,8 +24,10 @@ BuildRequires: libseccomp-devel
 BuildRequires: libselinux-devel
 BuildRequires: libtool
 BuildRequires: go-md2man
+%if ! 0%{?centos}
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.15
+%endif
 %endif
 Provides: oci-runtime = 2
 
@@ -72,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 * Wed Sep 30 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.15-4
 - backport "exec: check read bytes from sync"
 
-* Thu Sep 24 10:13:25 EDT 2020 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.15-3
+* Thu Sep 24 2020 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.15-3
 - release tag ahead of f32
 
 * Wed Sep 23 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.15-1
