@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.17
-Release: 1%{?dist}
+Release: 3%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -53,6 +53,12 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Feb 04 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.17-3
+- use deprecated changelog format
+
+* Thu Feb 04 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.17-2
+- bump for centos on obs
+
 * Thu Jan 21 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.17-1
 - built version 0.17
 
@@ -98,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 * Thu Aug 27 2020 Giuseppe Scrivano <gscrivan@redhat.com> - 0.14.1-3
 - backport ed9c3e6f466dfb6d2e79802060fabd5f4b66f78e
 
-* Mon Aug 17 13:15:45 GMT 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14.1-1
+* Mon Aug 17 2020 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.14.1-1
 - autobuilt 0.14.1
 
 * Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.14.1-2
