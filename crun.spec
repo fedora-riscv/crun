@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.17
-Release: 2%{?dist}
+Version: 0.18
+Release: 1%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -21,6 +21,7 @@ BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
 BuildRequires: make
+BuildRequires: glibc-static
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.15
 %endif
@@ -48,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Fri Feb 19 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.18-1
+- built version 0.18
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.17-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
