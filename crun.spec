@@ -21,6 +21,7 @@ BuildRequires: python3-libmount
 BuildRequires: libtool
 BuildRequires: go-md2man
 BuildRequires: make
+BuildRequires: glibc-static
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.15
 %endif
