@@ -49,7 +49,7 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
-* Fri Feb 19 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.17-1
+* Fri Feb 19 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.18-1
 - built version 0.18
 
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.17-2
