@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.18
-Release: 1%{?dist}
+Release: 2%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -55,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Feb 24 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-2
+- bump to make centos happy
+
 * Fri Feb 19 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.18-1
 - built version 0.18
 
