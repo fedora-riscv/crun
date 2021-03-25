@@ -17,7 +17,6 @@ BuildRequires: python3-libmount
 BuildRequires: python
 %endif
 BuildRequires: git
-BuildRequires: libcap-devel >= 2.48
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
 BuildRequires: libseccomp-devel
@@ -32,7 +31,13 @@ BuildRequires: criu-devel >= 3.15
 %endif
 %endif
 Provides: oci-runtime = 2
+%if 0%{?fedora}
+BuildRequires: libcap-devel >= 2.48
 Requires: libcap >= 2.48
+%else
+BuildRequires: libcap-devel
+Requires: libcap
+%endif
 
 %description
 crun is a runtime for running OCI containers
