@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.18
-Release: 3%{?dist}
+Release: 4%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -17,7 +17,7 @@ BuildRequires: python3-libmount
 BuildRequires: python
 %endif
 BuildRequires: git
-BuildRequires: libcap-devel
+BuildRequires: libcap-devel >= 2.48
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
 BuildRequires: libseccomp-devel
@@ -32,6 +32,7 @@ BuildRequires: criu-devel >= 3.15
 %endif
 %endif
 Provides: oci-runtime = 2
+Requires: libcap >= 2.48
 
 %description
 crun is a runtime for running OCI containers
@@ -55,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Mar 25 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-4
+- Requires: libcap >= 2.48
+
 * Thu Feb 25 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-3
 - bump for centos
 
