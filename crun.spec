@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.18
-Release: 2%{?dist}
+Release: 4%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -50,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Mar 25 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-4
+- bump release tag to stay ahead of older fedora
+
 * Thu Mar 25 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-2
 - Requires: libcap >= 2.48
 
