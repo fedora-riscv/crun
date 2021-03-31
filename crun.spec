@@ -1,8 +1,10 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.18
-Release: 4%{?dist}
+Release: 5%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
+Patch0: https://github.com/containers/crun/commit/f642968ec5ae05b33f2545da6edf135c338b34d1.patch
+Patch1: https://github.com/containers/crun/commit/3e7fa1db14a3c4ad0605f1cb2851ec134f4ccc07.patch
 License: GPLv2+
 URL: https://github.com/containers/crun
 
@@ -61,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Mar 31 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-5
+- linux: always remount bind mounts ghpr#640
+
 * Thu Mar 25 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.18-4
 - Requires: libcap >= 2.48
 
