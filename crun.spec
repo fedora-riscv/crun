@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.19
-Release: 1%{?dist}
+Release: 2%{?dist}
 Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
 URL: https://github.com/containers/crun
@@ -31,7 +31,7 @@ BuildRequires: glibc-static
 BuildRequires: criu-devel >= 3.15
 %endif
 %endif
-Provides: oci-runtime = 2
+Provides: oci-runtime
 
 %description
 crun is a runtime for running OCI containers
@@ -55,6 +55,14 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Tue Apr 13 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19-2
+- unversioned Provides: oci-runtime
+- runc package will also provide an unversioned Provides: oci-runtime.
+- user should pull in runc separately or else it will install crun by default
+ (alphabetical order)
+- similar situation as caddy, httpd, lighttpd and nginx having Provides:
+webserver
+
 * Tue Apr 06 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.19-1
 - built version 0.19
 
