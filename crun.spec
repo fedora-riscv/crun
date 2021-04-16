@@ -2,9 +2,9 @@ Summary: OCI runtime written in C
 Name: crun
 Version: 0.19
 Release: 2%{?dist}
-Source0: https://github.com/containers/crun/releases/download/%{version}/%{name}-%{version}.tar.gz
-License: GPLv2+
 URL: https://github.com/containers/crun
+Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.gz
+License: GPLv2+
 
 # We always run autogen.sh
 BuildRequires: autoconf
