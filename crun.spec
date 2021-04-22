@@ -1,7 +1,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.19.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: https://github.com/containers/crun
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.gz
 License: GPLv2+
@@ -49,6 +49,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Apr 22 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1-2
+- rebuild for new bodhi
+
 * Thu Apr 22 2021 Giuseppe Scrivano <gscrivan@redhat.com> - 0.19.1-1
 - built version 0.19.1
 
