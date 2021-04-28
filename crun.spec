@@ -1,9 +1,21 @@
+%global git0 https://github.com/containers/crun
+%global commit0 3886321243a945d8ae50b19db7d4cdde3d8421f8
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global shortercommit0 %(c=%{commit0}; echo ${c:0:4})
+  
+# Used for comparing with latest upstream tag
+# to decide whether to autobuild (non-rawhide only)
+%define built_tag 0.19.1
+%define built_tag_strip %(b=%{built_tag}; echo ${b:1})
+%define download_url %{git0}/archive/%{built_tag}.tar.gz
+
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.19.1
-Release: 2%{?dist}
-URL: https://github.com/containers/crun
-Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.gz
+Version: 0.19.1.7
+Release: 0.1.git%{shortcommit0}%{?dist}
+URL: %{git0}
+# Source0 generated using `make dist` in upstream repo
+Source0: %{name}-%{version}-%{shortercommit0}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -31,7 +43,7 @@ Provides: oci-runtime
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}-%{shortercommit0}
 
 %build
 ./autogen.sh
@@ -41,7 +53,7 @@ crun is a runtime for running OCI containers
 
 %install
 %make_install
-rm -rf $RPM_BUILD_ROOT/usr/lib*
+rm -rf %{buildroot}%{_prefix}/lib*
 
 %files
 %license COPYING
@@ -49,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Apr 28 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1.7-0.1.git3886321
+- built 3886321
+
 * Thu Apr 22 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1-2
 - rebuild for new bodhi
 
