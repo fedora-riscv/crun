@@ -1,5 +1,5 @@
 %global git0 https://github.com/containers/crun
-%global commit0 3886321243a945d8ae50b19db7d4cdde3d8421f8
+%global commit0 1dead7ebaf4f80a2553ceb30da17e93017f8159e
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global shortercommit0 %(c=%{commit0}; echo ${c:0:4})
   
@@ -11,7 +11,7 @@
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.19.1.7
+Version: 0.19.1.11
 Release: 0.1.git%{shortcommit0}%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
@@ -61,6 +61,9 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Mon May 03 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1.11-0.1.git1dead7e
+- built 1dead7e
+
 * Wed Apr 28 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1.7-0.1.git3886321
 - built 3886321
 
