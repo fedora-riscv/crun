@@ -1,9 +1,16 @@
+%global git0 https://github.com/containers/crun
+
+# Used for comparing with latest upstream tag
+# to decide whether to autobuild and set download_url (non-rawhide only)
+%define built_tag 0.19.1
+%define built_tag_strip %(b=%{built_tag}; echo ${b:1})
+
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.19.1
-Release: 1%{?dist}
+Release: 3%{?dist}
 URL: https://github.com/containers/crun
-Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -16,7 +23,7 @@ BuildRequires: python3
 BuildRequires: python3-libmount
 BuildRequires: python
 %endif
-BuildRequires: git
+BuildRequires: git-core
 BuildRequires: libcap-devel
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
@@ -55,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Mon May 17 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1-3
+- rebuild to fix prior build downgrades
+
 * Fri May 07 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.19.1-1
 - autobuilt 0.19.1
 
