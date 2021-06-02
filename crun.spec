@@ -1,18 +1,18 @@
 %global git0 https://github.com/containers/crun
-%global commit0 1942907e28e6bc04a97af452f3780c22157b2471
+%global commit0 ffb75b2c126ade53c180c0ef5602a2286190a32d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global shortercommit0 %(c=%{commit0}; echo ${c:0:4})
   
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild (non-rawhide only)
-%define built_tag 0.19.1
+%define built_tag 0.20
 %define built_tag_strip %(b=%{built_tag}; echo ${b:1})
 %define download_url %{git0}/archive/%{built_tag}.tar.gz
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.19.1.50
-Release: 0.10.git%{shortcommit0}%{?dist}
+Version: 0.20.1
+Release: 0.11.git%{shortcommit0}%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
 Source0: %{name}-%{version}-%{shortercommit0}.tar.xz
@@ -61,6 +61,10 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Jun 02 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.20.1-0.11.gitffb75b2
+- bump to 0.20.1
+- autobuilt ffb75b2
+
 * Tue May 25 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.19.1.50-0.10.git1942907
 - bump to 0.19.1.50
 - autobuilt 1942907
