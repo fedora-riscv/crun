@@ -1,15 +1,14 @@
-%global git0 https://github.com/containers/crun
+%global git0 https://github.com/containers/%{name}
 
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild and set download_url (non-rawhide only)
-%define built_tag 0.19.1
-%define built_tag_strip %(b=%{built_tag}; echo ${b:1})
+%define built_tag 0.20
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.19.1
-Release: 3%{?dist}
-URL: https://github.com/containers/crun
+Version: 0.20
+Release: 1%{?dist}
+URL: %{git0}
 Source0: %{name}-%{version}.tar.xz
 License: GPLv2+
 
@@ -56,6 +55,9 @@ rm -rf $RPM_BUILD_ROOT/usr/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Jun 02 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.20-1
+- bump to 0.20
+
 * Mon May 17 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.19.1-3
 - rebuild to fix prior build downgrades
 
