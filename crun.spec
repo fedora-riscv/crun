@@ -1,5 +1,5 @@
 %global git0 https://github.com/containers/crun
-%global commit0 7adf4d0c22d871a9aab71229c64a08e09bf9de0c
+%global commit0 9dec366ed15c0cee945b3f1c95ffbd54a292a6aa
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global shortercommit0 %(c=%{commit0}; echo ${c:0:4})
   
@@ -11,8 +11,8 @@
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.20.1.1
-Release: 0.13.git%{shortcommit0}%{?dist}
+Version: 0.20.1.3
+Release: 0.14.git%{shortcommit0}%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
 Source0: %{name}-%{version}-%{shortercommit0}.tar.xz
@@ -61,6 +61,10 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Tue Jun 15 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.20.1.3-0.14.git9dec366
+- bump to 0.20.1.3
+- autobuilt 9dec366
+
 * Thu Jun 10 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.20.1.1-0.13.git7adf4d0
 - bump to 0.20.1.1
 - autobuilt 7adf4d0
