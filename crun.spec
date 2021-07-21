@@ -12,7 +12,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.20.1.9
-Release: 0.17.git%{shortcommit0}%{?dist}
+Release: 0.18.git%{shortcommit0}%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
 Source0: %{name}-%{version}-%{shortercommit0}.tar.xz
@@ -61,6 +61,9 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Wed Jul 21 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.20.1.9-0.18.git60de767
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Wed Jun 23 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 0.20.1.9-0.17.git60de767
 - bump to 0.20.1.9
 - autobuilt 60de767
