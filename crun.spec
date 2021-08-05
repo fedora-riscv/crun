@@ -1,21 +1,17 @@
 %global git0 https://github.com/containers/crun
-%global commit0 60de7677f4ea9db37ce48964e995c2b0536af886
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-%global shortercommit0 %(c=%{commit0}; echo ${c:0:4})
   
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild (non-rawhide only)
-%define built_tag 0.20.1
-%define built_tag_strip %(b=%{built_tag}; echo ${b:1})
-%define download_url %{git0}/archive/%{built_tag}.tar.gz
+%global built_tag 0.21
+%global built_tag_strip %(b=%{built_tag}; echo ${b:1})
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 0.20.1.9
-Release: 0.18.git%{shortcommit0}%{?dist}
+Version: 0.21
+Release: 1%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
-Source0: %{name}-%{version}-%{shortercommit0}.tar.xz
+Source0: %{name}-%{version}-dirty.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -43,7 +39,7 @@ Provides: oci-runtime
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -p1 -n %{name}-%{version}-%{shortercommit0}
+%autosetup -p1 -n %{name}-%{version}-dirty
 
 %build
 ./autogen.sh
@@ -61,6 +57,9 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Aug 05 2021 Lokesh Mandvekar <lsm5@fedoraproject.org> - 0.21-1
+- bump to 0.21
+
 * Wed Jul 21 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.20.1.9-0.18.git60de767
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
