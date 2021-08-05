@@ -2,14 +2,14 @@
 
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild and set download_url (non-rawhide only)
-%define built_tag 0.20.1
+%global built_tag 0.20.1
 
 Summary: OCI runtime written in C
 Name: crun
 Version: 0.20.1
 Release: 1%{?dist}
 URL: %{git0}
-Source0: %{name}-%{version}.tar.xz
+Source0: %{name}-%{version}-dirty.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -43,7 +43,7 @@ Provides: oci-runtime
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}-dirty
 
 %build
 ./autogen.sh
@@ -53,7 +53,7 @@ crun is a runtime for running OCI containers
 
 %install
 %make_install
-rm -rf $RPM_BUILD_ROOT/usr/lib*
+rm -rf %{buildroot}%{_usr}/lib*
 
 %files
 %license COPYING
