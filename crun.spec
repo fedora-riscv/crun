@@ -43,7 +43,7 @@ Provides: oci-runtime
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -p1 -n %{name}-%{version}-dirty
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 ./autogen.sh
