@@ -11,7 +11,7 @@ Version: 0.21
 Release: 1%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
-Source0: %{name}-%{version}-dirty.tar.xz
+Source0: %{name}-%{version}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -39,7 +39,7 @@ Provides: oci-runtime
 crun is a runtime for running OCI containers
 
 %prep
-%autosetup -p1 -n %{name}-%{version}-dirty
+%autosetup -p1 -n %{name}-%{version}
 
 %build
 ./autogen.sh
