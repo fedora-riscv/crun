@@ -9,7 +9,7 @@ Name: crun
 Version: 0.21
 Release: 1%{?dist}
 URL: %{git0}
-Source0: %{name}-%{version}-dirty.tar.xz
+Source0: %{name}-%{version}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
