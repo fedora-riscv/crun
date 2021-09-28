@@ -28,6 +28,7 @@ BuildRequires: libtool
 BuildRequires: go-md2man
 BuildRequires: make
 BuildRequires: glibc-static
+BuildRequires: protobuf-c-devel
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.15
 %endif
