@@ -2,12 +2,12 @@
   
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild (non-rawhide only)
-%global built_tag 1.1
+%global built_tag 1.2
 %global built_tag_strip %(b=%{built_tag}; echo ${b:1})
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.1
+Version: 1.2
 Release: 1%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
@@ -58,6 +58,9 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Fri Oct 08 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.2-1
+- autobuilt 1.2
+
 * Mon Sep 27 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.1-1
 - autobuilt 1.1
 
