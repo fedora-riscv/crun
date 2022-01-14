@@ -2,11 +2,11 @@
 
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild and set download_url (non-rawhide only)
-%global built_tag 1.4
+%global built_tag 1.4.1
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.4
+Version: 1.4.1
 Release: 1%{?dist}
 URL: %{git0}
 Source0: %{name}-%{version}.tar.xz
@@ -56,6 +56,9 @@ rm -rf %{buildroot}%{_usr}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Fri Jan 14 2022 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.4.1-1
+- autobuilt 1.4.1
+
 * Wed Dec 22 2021 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.4-1
 - autobuilt 1.4
 
