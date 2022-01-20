@@ -8,7 +8,7 @@
 Summary: OCI runtime written in C
 Name: crun
 Version: 1.4.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
 Source0: %{name}-%{version}.tar.xz
@@ -58,6 +58,9 @@ rm -rf %{buildroot}%{_prefix}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.4.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Fri Jan 14 2022 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.4.1-1
 - autobuilt 1.4.1
 
