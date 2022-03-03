@@ -1,6 +1,6 @@
 %global git0 https://github.com/containers/crun
   
-%global built_tag 1.4.2
+%global built_tag 1.4.3
 %global gen_version %(b=%{built_tag}; echo ${b/-/"~"})
 
 Summary: OCI runtime written in C
@@ -9,7 +9,7 @@ Version: %{gen_version}
 Release: %autorelease
 URL: %{git0}
 # Source0 generated using `make dist` in upstream repo
-Source0: %{name}-%{version}.tar.xz
+Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
