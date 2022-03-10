@@ -16,7 +16,7 @@ License: GPLv2+
 BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: gcc
-BuildRequires: python
+BuildRequires: python3
 BuildRequires: libcap-devel
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
