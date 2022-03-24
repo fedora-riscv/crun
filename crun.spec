@@ -1,6 +1,6 @@
 %global git0 https://github.com/containers/crun
   
-%global built_tag 1.4.3
+%global built_tag 1.4.4
 %global gen_version %(b=%{built_tag}; echo ${b/-/"~"})
 
 Summary: OCI runtime written in C
