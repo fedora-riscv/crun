@@ -2,14 +2,14 @@
 
 # Used for comparing with latest upstream tag
 # to decide whether to autobuild and set download_url (non-rawhide only)
-%global built_tag 1.4.2
+%global built_tag 1.4.4
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.4.2
+Version: 1.4.4
 Release: 1%{?dist}
 URL: %{git0}
-Source0: %{name}-%{version}.tar.xz
+Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 License: GPLv2+
 
 # We always run autogen.sh
@@ -56,6 +56,10 @@ rm -rf %{buildroot}%{_usr}/lib*
 %{_mandir}/man1/*
 
 %changelog
+* Thu Mar 31 2022 Lokesh Mandvekar <lsm5@fedoraproject.org> - 1.4.4-1
+- Resolves: #2066845, #2070116 - Security fix for CVE-2022-27650
+- bump to v1.4.4
+
 * Wed Jan 26 2022 RH Container Bot <rhcontainerbot@fedoraproject.org> - 1.4.2-1
 - autobuilt 1.4.2
 
