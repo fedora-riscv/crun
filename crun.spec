@@ -1,5 +1,3 @@
-%global git0 https://github.com/containers/crun
-  
 %global built_tag 1.4.4
 %global gen_version %(b=%{built_tag}; echo ${b/-/"~"})
 
@@ -7,8 +5,7 @@ Summary: OCI runtime written in C
 Name: crun
 Version: %{gen_version}
 Release: %autorelease
-URL: %{git0}
-# Source0 generated using `make dist` in upstream repo
+URL: https://github.com/containers/%{name}
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 License: GPLv2+
 
@@ -34,7 +31,7 @@ BuildRequires: criu-devel >= 3.15
 Provides: oci-runtime
 
 %description
-crun is a runtime for running OCI containers
+%{name} is a runtime for running OCI containers
 
 %prep
 %autosetup -p1 -n %{name}-%{version}
