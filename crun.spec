@@ -1,12 +1,20 @@
-%global built_tag 1.4.5
+%if 0%{?fedora} >= 37
+%ifarch aarch64,x86_64
+%global krun_support enabled
+%endif
+%else
+%global krun_support disabled
+%endif
+
+%global built_tag 1.5
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.4.5
+Version: 1.5
 URL: https://github.com/containers/%{name}
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 %if "%{_vendor}" == "debbuild"
-Maintainer: Lokesh Mandvekar <https://github.com/lsm5>
+Packager: Lokesh Mandvekar <lsm5@fedoraproject.org>
 License: GPL-2.0+
 Release: 0%{?dist}
 %else
@@ -31,6 +39,10 @@ BuildRequires: python3
 BuildRequires: libcap-devel
 BuildRequires: systemd-devel
 BuildRequires: yajl-devel
+%if "%{krun_support}" == "enabled"
+BuildRequires: libkrun-devel
+Provides: krun
+%endif
 BuildRequires: libseccomp-devel
 BuildRequires: libselinux-devel
 BuildRequires: python3-libmount
@@ -38,9 +50,10 @@ BuildRequires: make
 BuildRequires: glibc-static
 BuildRequires: protobuf-c-devel
 %ifnarch %ix86
-BuildRequires: criu-devel >= 3.15
+BuildRequires: criu-devel >= 3.17.1-2
 %endif
 %endif
+Requires: criu >= 3.17.1-2
 Provides: oci-runtime
 
 %description
@@ -51,7 +64,12 @@ Provides: oci-runtime
 
 %build
 ./autogen.sh
+
+%if "%{krun_support}" == "enabled"
+%configure --disable-silent-rules --with-libkrun
+%else
 %configure --disable-silent-rules
+%endif
 
 %make_build
 
@@ -59,9 +77,16 @@ Provides: oci-runtime
 %make_install
 rm -rf %{buildroot}%{_prefix}/lib*
 
+%if "%{krun_support}" == "enabled"
+ln -s %{_bindir}/%{name} %{buildroot}%{_bindir}/krun
+%endif
+
 %files
 %license COPYING
 %{_bindir}/%{name}
+%if "%{krun_support}" == "enabled"
+%{_bindir}/krun
+%endif
 %{_mandir}/man1/*
 
 %changelog
