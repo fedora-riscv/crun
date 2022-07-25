@@ -53,7 +53,7 @@ BuildRequires: protobuf-c-devel
 BuildRequires: criu-devel >= 3.17.1-2
 %endif
 %endif
-Requires: criu >= 3.17.1-2
+Requires: criu >= 3.17.1
 Provides: oci-runtime
 
 %description
