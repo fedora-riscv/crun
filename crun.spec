@@ -1,9 +1,10 @@
+%global krun_opts %{nil}
+
 %if 0%{?fedora} >= 37
-%ifarch aarch64,x86_64
+%ifarch aarch64 || x86_64
 %global krun_support enabled
+%global krun_opts --with-libkrun
 %endif
-%else
-%global krun_support disabled
 %endif
 
 %global built_tag 1.5
@@ -64,13 +65,7 @@ Provides: oci-runtime
 
 %build
 ./autogen.sh
-
-%if "%{krun_support}" == "enabled"
-%configure --disable-silent-rules --with-libkrun
-%else
-%configure --disable-silent-rules
-%endif
-
+%configure --disable-silent-rules %{krun_opts}
 %make_build
 
 %install
