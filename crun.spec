@@ -15,7 +15,7 @@ Version: 1.5
 URL: https://github.com/containers/%{name}
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 %if "%{_vendor}" == "debbuild"
-Packager: Lokesh Mandvekar <lsm5@fedoraproject.org>
+Packager: Podman Debbuild Maintainers <https://github.com/orgs/containers/teams/podman-debbuild-maintainers>
 License: GPL-2.0+
 Release: 0%{?dist}
 %else
@@ -33,6 +33,7 @@ BuildRequires: libseccomp-dev
 BuildRequires: libsystemd-dev
 BuildRequires: libyajl-dev
 BuildRequires: pkg-config
+Requires: criu
 %else
 BuildRequires: gcc
 BuildRequires: git-core
@@ -53,8 +54,8 @@ BuildRequires: protobuf-c-devel
 %ifnarch %ix86
 BuildRequires: criu-devel >= 3.17.1-2
 %endif
-%endif
 Requires: criu >= 3.17.1
+%endif
 Provides: oci-runtime
 
 %description
