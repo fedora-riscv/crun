@@ -7,7 +7,7 @@
 %endif
 %endif
 
-%global built_tag 1.5
+%global built_tag_strip 1.5
 
 Summary: OCI runtime written in C
 Name: crun
@@ -62,7 +62,7 @@ Provides: oci-runtime
 %{name} is a runtime for running OCI containers
 
 %prep
-%autosetup -Sgit
+%autosetup -Sgit %{name}-%{built_tag_strip}
 
 %build
 ./autogen.sh
