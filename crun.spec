@@ -7,7 +7,7 @@
 %endif
 %endif
 
-%global built_tag_strip 1.5
+%global built_tag_strip 1.6
 
 Summary: OCI runtime written in C
 Name: crun
