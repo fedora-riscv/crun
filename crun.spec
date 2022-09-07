@@ -11,7 +11,7 @@
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.5
+Version: 1.6
 URL: https://github.com/containers/%{name}
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 %if "%{_vendor}" == "debbuild"
