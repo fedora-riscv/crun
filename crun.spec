@@ -6,7 +6,7 @@
 %global krun_support disabled
 %endif
 
-%global built_tag 1.5
+%global built_tag_strip 1.6
 
 Summary: OCI runtime written in C
 Name: crun
