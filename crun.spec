@@ -12,7 +12,7 @@
 
 Summary: OCI runtime written in C
 Name: crun
-Version: 1.6
+Version: %{gen_version}
 URL: https://github.com/containers/%{name}
 # Fetched from upstream
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
