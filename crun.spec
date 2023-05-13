@@ -23,7 +23,7 @@ URL: https://github.com/containers/%{name}
 # Fetched from upstream
 Source0: %{url}/releases/download/%{version}/%{name}-%{version}.tar.xz
 License: GPL-2.0-only
-Release: %autorelease
+Release: %autorelease -e rv64
 ExclusiveArch: %{golang_arches_future}
 BuildRequires: autoconf
 BuildRequires: automake
@@ -48,7 +48,7 @@ BuildRequires: python3-libmount
 BuildRequires: make
 BuildRequires: glibc-static
 BuildRequires: protobuf-c-devel
-%ifnarch %ix86
+%ifnarch %ix86 riscv64
 BuildRequires: criu-devel >= 3.17.1-2
 %endif
 Recommends: criu >= 3.17.1
